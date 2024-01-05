@@ -1,0 +1,30 @@
+#include <Servo.h> // Defining the servo motor library
+
+#define servoPin 6 // Defining a global variable to store the input pin position of the motor
+
+Servo myservo; //Calling a servo motor function from the library
+
+int Ser; // Initializing a variable
+
+void setup () {
+  Serial.begin(9600); // Calling serial monitor for data display
+  myservo.attach(6); // Defining the library function with the input position of the servo motor
+}
+
+void loop() {
+  for (Ser = 0; Ser <= 180; Ser++){ // Defining a for loop for multiple forward repetition
+    myservo.write(Ser); // Sending an output to the motor for it to rotate
+    Serial.print("Motor Angle: "); // Printing data on the serial monitor
+    Serial.println(Ser); // Printing the value stored in Ser variable
+
+    delay(100); // Adding a time delay
+  }
+
+  for (Ser = 180; Ser >= 0; Ser--){ // Defining a for loop for multiple backward repetition
+    myservo.write(Ser); // Sending an output to the motor for it to rotate
+    Serial.print("Motor Angle: "); // Printing data on the serial monitor
+    Serial.println(Ser); // Printing the value stored in Ser variable
+
+    delay(100); // Adding a time delay
+  }
+}

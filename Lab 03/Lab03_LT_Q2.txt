@@ -1,0 +1,15 @@
+int potOut; // Assigning Variable to store Potentionmeter Voltage
+int mapVoltage; // Assigning Variable to store Analog to Digital mapped voltage
+
+void setup() {
+  // Assigning LED input port and serial monitor initiation
+  pinMode(3, OUTPUT); // Port location for Red LED
+  Serial.begin(9600); // Calling serial monitor for data display
+}
+
+void loop() {
+potOut = analogRead(A5); // Reading Potentionmeter voltage and storing
+Serial.println(potOut); // Printing data to serial monitor
+mapVoltage = map(potOut, 0, 1023, 0, 255); // Mapping Analog voltage to Digital voltage
+analogWrite(3, mapVoltage); // Using mapped voltage for LED input voltage
+}

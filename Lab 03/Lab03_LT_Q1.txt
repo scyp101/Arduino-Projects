@@ -1,0 +1,9 @@
+void setup() {
+Serial.begin(9600); // Calling serial monitor for data display
+}
+
+void loop() {
+
+// put your main code here, to run repeatedly:
+Serial.println(analogRead(A5)); // Printing data to serial monitor & assigning analog port to read
+}

@@ -1,0 +1,32 @@
+#include <DHT.h> //Including library to be used in the code
+
+#define DHTPIN 10 // Defining digital pin port for sensor
+#define DHTTYPE DHT22 // DHT22 (AM2302)
+#define LEDPIN 2 // Defining digital pin port for LED
+
+DHT dht(DHTPIN, DHTTYPE); // Creating an object called dht while defining arguements (pin and type) and storing this into DHT
+float tempC; // Defining variable to start temperature
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+  dht.begin(); // Calling library for temperature input and calculations
+}
+
+void loop() {
+  tempC = dht.readTemperature(); // Storing tempertaure value from library function in °C
+  
+  if (tempC > 15) { // Defining if condition to check temerature limit
+  Serial.println("Warning!! Temperature has been exceeded!!"); // Printing warning statement to serial monitor when if condition verifies
+  Serial.println(""); // Adding this to add a new line for better visualization
+  Serial.print("Current Room Temperature in °C is: "); // Printing data to serial monitor
+  Serial.println(tempC); // Printing value of tempC to serial monitor
+
+  digitalWrite(LEDPIN, HIGH); // Assignning LED with 1 (High)
+  delay(100); // Adding a time delay
+  digitalWrite(LEDPIN, LOW); // Assignning LED with  0 (Low)
+  delay(100); // Adding a time delay
+  }
+  else { // Condition is true when if does not verify
+    Serial.println("Temperature is normal!"); // Printing statement to serial monitor when else condition verifies
+  }
+}

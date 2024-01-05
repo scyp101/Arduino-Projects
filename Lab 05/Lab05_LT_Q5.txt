@@ -1,0 +1,34 @@
+#include <DHT.h> //Including library to be used in the code
+
+#define DHTPIN 10 // // Defining digital pin port for sensor
+#define DHTTYPE DHT22 // DHT22 (AM2302)
+
+DHT dht(DHTPIN, DHTTYPE); // Creating an object called dht while defining arguements (pin and type) and storing this into DHT
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+  dht.begin(); // Calling library for temperature input and calculations
+}
+
+void loop() {
+  delay(1000); // Adding a time delay
+  
+  float humidity = dht.readHumidity(); // Defining variable to store humidity value from library function
+  
+  Serial.println(""); // Adding this to add a new line for better visualization
+  Serial.print("Current Room Humidity is: "); // Printing data to serial monitor
+  Serial.print(humidity); // Printing value of humidity to serial monitor
+  Serial.println("%"); // Printing percentage unit to serial monitor
+
+  float tempC = dht.readTemperature(); // Defining variable to store tempertaure value from library function in °C
+  float tempF = ((tempC*1.8)+32); // Defining variable to store tempertaure value from formulae in °F
+  float tempK = tempC + 273.15; // Defining variable to store tempertaure value from formulae in K
+  
+  Serial.println(""); // Adding this to add a new line for better visualization
+  Serial.print("Current Room Temperature in °C is: "); // Printing data to serial monitor
+  Serial.println(tempC); // Printing value of tempC to serial monitor
+  Serial.print("Current Room Temperature in °F is: "); // Printing data to serial monitor
+  Serial.println(tempF); // Printing value of tempF to serial monitor
+  Serial.print("Current Room Temperature in K is: "); // Printing data to serial monitor
+  Serial.println(tempK); // Printing value of tempK to serial monitor
+}

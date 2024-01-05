@@ -1,0 +1,46 @@
+#include <DHT.h> //Including library to be used in the code
+
+#define DHTPIN 10 // // Defining global pin port for sensor
+#define DHTTYPE DHT22 // DHT22 (AM2302)
+#define LEDPIN1 2 // Defining global pin port for LED
+#define LEDPIN2 3 // Defining global pin port for LED
+#define LEDPIN3 4 // Defining global pin port for LED
+#define LEDPIN4 5 // Defining global pin port for LED
+#define LEDPIN5 6 // Defining global pin port for LED
+
+DHT dht(DHTPIN, DHTTYPE); // Creating an object called dht while defining arguements (pin and type) and storing this into DHT
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+  dht.begin(); // Calling library for humidity input and calculations
+  pinMode(LEDPIN1, OUTPUT); // Port location for Red LED
+  pinMode(LEDPIN2, OUTPUT); // Port location for Red LED
+  pinMode(LEDPIN3, OUTPUT); // Port location for Red LED
+  pinMode(LEDPIN4, OUTPUT); // Port location for Red LED
+  pinMode(LEDPIN5, OUTPUT); // Port location for Red LED
+}
+
+void loop() {
+  delay(1000); // Adding a time delay
+  float humidity = dht.readHumidity(); // Defining variable to store humidity value from library function
+
+  if (humidity >= 0) { //Checks the range of humidity and executes the following command if True
+    digitalWrite(LEDPIN1, HIGH); //Output defined for respective LED
+  }
+  if (humidity >= 40) { //Checks the range of humidity and executes the following command if True
+    digitalWrite(LEDPIN2, HIGH); //Output defined for respective LED
+  } 
+  if (humidity >= 60) { //Checks the range of humidity and executes the following command if True
+    digitalWrite(LEDPIN3, HIGH); //Output defined for respective LED
+  } 
+  if (humidity >= 80) { //Checks the range of humidity and executes the following command if True
+    digitalWrite(LEDPIN4, HIGH); //Output defined for respective LED
+  } 
+  if (humidity >= 100) { //Checks the range of humidity and executes the following command if True
+    digitalWrite(LEDPIN5, HIGH); //Output defined for respective LED
+  } 
+
+  Serial.print("Current Room Humidity is: "); // Printing data to serial monitor
+  Serial.print(humidity); // Printing value of humidity to serial monitor
+  Serial.println("%"); // Printing percentage unit to serial monitor
+}

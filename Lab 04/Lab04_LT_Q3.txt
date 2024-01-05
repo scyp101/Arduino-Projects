@@ -1,0 +1,48 @@
+#define trigPin 4 // Defining trigger global variable with pin value
+#define echoPin 5 // Defining echo global variable with pin value
+
+float distance; // Defining variable to store cm distance value
+float mdistance; // Defining variable to store m distance value
+int duration; // Defining variable to store time value
+
+// Defining function to store multiple print statement and print all when called
+float distanceFunction(float x, float y) {
+  Serial.print("Distance covered by the wave is: "); // Printing data to serial monitor
+  Serial.print(x); // Printing cm distance value to serial monitor
+  Serial.print(" cm and "); // Printing rest of the text to serial monitor
+  Serial.print(y); // Printing m distance value to serial monitor
+  Serial.println(" m"); // Printing rest of the text to serial monitor
+}
+
+void setup() {
+  pinMode(trigPin, OUTPUT); // Assigning output port for trigger pin
+  pinMode(echoPin, INPUT); // Assigning input port for echo pin
+  Serial.begin(9600); // Calling serial monitor for data display
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW); // Clearing already storred code in Arduino from previous run (if any)
+  delayMicroseconds(2); // Defining duration for this clear code to run
+
+  digitalWrite(trigPin, HIGH); // Assigning trigger pin with max voltage
+  delayMicroseconds(10); // Assigning duration for the above trigger input code
+
+  digitalWrite(trigPin, LOW); // Assigning trigger pin with zero voltage to stop code
+
+  duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds and stores in duration
+
+  distance = duration * 0.034 / 2; // Using speed distance formulae to convert time into distance using speed of sound
+  mdistance = distance / 100; // Converting cm distance to m distance
+
+  if ((distance > 30) && (distance < 45)) { // Checking cm distance to be above 30 and below 45 and execute below code when true
+    Serial.println("SLOW!!"); // Printing text to serial monitor when above condition is true
+  }
+  if ((distance > 15) && (distance < 30)) { // Checking cm distance to be above 15 and below 30 and execute below code when true
+    Serial.println("WATCH OUT!!"); // Printing text to serial monitor when above condition is true
+  }
+  if ((distance > 0) && (distance < 15)) { // Checking cm distance to be above 0 and below 15 and execute below code when true
+    Serial.println("STOP!!"); // Printing text to serial monitor when above condition is true
+  }
+  
+  distanceFunction(distance, mdistance); // Calling function to call same print code and print
+}

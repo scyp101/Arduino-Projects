@@ -1,0 +1,22 @@
+void setup() {
+  // Defining output ports for LED inputs
+  pinMode(5, OUTPUT); // Port location for Yellow LED
+  pinMode(6, OUTPUT); // Port location for Red LED
+  pinMode(7, OUTPUT); // Port location for Green LED
+}
+
+void loop() {
+  // Assignning LED with 1 (High) or 0 (Low) with their respective duration
+  digitalWrite(5, HIGH);
+  delay(1000); // Adding a time delay
+  digitalWrite(5, LOW);
+  delay(100);
+  digitalWrite(6, HIGH);
+  delay(100);
+  digitalWrite(6, LOW);
+  delay(100);
+  digitalWrite(7, HIGH);
+  delay(100);
+  digitalWrite(7, LOW);
+  delay(100);
+}

@@ -1,0 +1,27 @@
+#define buttonPin 7 // Defining global variable 
+
+bool buttonstate; // Defining variable to store buttonstate value
+int Status = LOW; // Defining variable to store Status value
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+  pinMode(buttonPin, INPUT); // Port location for button
+}
+
+void loop() {
+  buttonstate = digitalRead(buttonPin); // Reading the state of button and storing into the variable 
+  
+  if (buttonstate == HIGH) { // Defining an if statement for the code to run when button is pressed
+    Status = !Status; // Reversing the state of button state variable
+    Serial.print(Status); // Printing value of Status to serial monitor
+
+    if (Status == 1) { // Using additional if statements to print more appropiate text to serial monitor
+      Serial.println(" = High"); // Printing text to serial monitor
+    }
+    if (Status == 0) { // Using additional if statements to print more appropiate text to serial monitor
+      Serial.println(" = Low"); // Printing text to serial monitor
+    }
+
+    delay(500); // Adding a time delay
+  }
+}

@@ -1,0 +1,23 @@
+#define buttonPin 7 // Defining global variable
+
+int count = 0; // Defining variable to store count value
+bool buttonstate; // Defining variable to store buttonstate value
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+  pinMode(buttonPin, INPUT); // Port location for button
+}
+
+void loop() {
+  buttonstate = digitalRead(buttonPin); // Reading the state of button and storing into the variable 
+  
+  if (buttonstate == HIGH) { // Defining an if statement for the code to run when button is pressed
+    count++; // Incrementing the count value by 1
+
+    Serial.print("Number of button presses: "); // Printing text to the serial monitor
+    Serial.print(count); // Printing value of coiunt to the serial monitor
+    Serial.println(" times"); // Printing text to the serial monitor
+    
+    delay(500); // Adding a delay
+  }
+}

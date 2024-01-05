@@ -1,0 +1,37 @@
+#include <Servo.h> // Defining the servo motor library
+
+#define servoPin 6 // Defining a global variable to store the input pin position of the motor
+#define PMpin A0 // Defining a global variable to store the input pin position of the potentiometer
+#define LEDpin 13 // Defining a global variable to store the input pin position of the LED
+
+Servo myservo; //Calling a servo motor function from the library
+
+int val; // Initializing a variable
+int mval; // Initializing a variable
+
+void setup () {
+  Serial.begin(9600); // Calling serial monitor for data display
+  myservo.attach(6); // Defining the library function with the input position of the servo motor
+  pinMode(LEDpin, OUTPUT); // Defining LED with LED pin and output 
+}
+
+void loop() {
+  val = analogRead(PMpin); // Reading the data from potentiometer and storing into val variable
+  mval = map(val,0,1023,0,180); // Mapping the analog data from potentiometer to angle range (0 to 180)
+
+  myservo.write(mval); // Sending an output to the motor for it to rotate
+
+  Serial.print("Potentiometer Value: "); // Printing data on the serial monitor
+  Serial.print(val); // Printing the value stored in val variable
+  Serial.print (", Servo Motor Value: "); // Printing data on the serial monitor
+  Serial.println(mval); // Printing the value stored in mval variable
+
+  if (val == 1023){ // Using an if statement to check and run the code when the condition is true
+    digitalWrite(LEDpin, 1); // Sending output to LED with on state
+    delay(400); // Adding a time delay between on and off state of the LED so the blinking is visible
+    digitalWrite(LEDpin, 0); // Sending output to LED with off state
+    delay(300); // Adding a time delay between on and off state of the LED so the blinking is visible. 300 ms is defined to that it adds with the 100 ms below and equals 400 ms
+  }
+
+  delay(100); // Adding a time delay
+}

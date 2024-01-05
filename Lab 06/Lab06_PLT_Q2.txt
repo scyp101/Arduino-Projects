@@ -1,0 +1,50 @@
+#define buttonPin 7 // Defining global variable
+#define LEDPin3 13 // Defining global variable
+#define LEDPin2 11 // Defining global variable
+#define LEDPin1 9 // Defining global variable
+
+bool buttonstate; // Defining variable to store buttonstate value
+int Status = LOW; // Defining variable to store Status value
+int count = 0; // Defining variable to store count value
+
+void setup() {
+  Serial.begin (9600); // Calling serial monitor for data display
+  pinMode(buttonPin, INPUT); // Port location for button
+  pinMode(LEDPin1, OUTPUT); // Port location for red LED
+  pinMode(LEDPin2, OUTPUT); // Port location for yellow LED
+  pinMode(LEDPin3, OUTPUT); // Port location for green LED
+}
+
+void loop() {
+  buttonstate = digitalRead(buttonPin); // Reading the state of button and storing into the variable 
+  
+  count = count + 1; // Incrementing the count value by 1
+  //Serial.print(count); // Printing value of Status to serial monitor
+
+  switch(count) { // Using switch statement to defining multiple cases for different outputs
+    case 1: // Case number 1 defined by the Count variable value
+      digitalWrite(LEDPin1,HIGH); // Output for LED defined with respective High
+      digitalWrite(LEDPin2,LOW); // Output for LED defined with respective Low
+      digitalWrite(LEDPin3,LOW); // Output for LED defined with respective Low
+      delay(500); // Adding a time delay
+      break; // Using break statement to get out off switch statement and also to not run the ahead code
+
+    case 2: // Case number 2 defined by the Count variable value
+      digitalWrite(LEDPin1,LOW); // Output for LED defined with respective Low
+      digitalWrite(LEDPin2,HIGH); // Output for LED defined with respective High
+      digitalWrite(LEDPin3,LOW); // Output for LED defined with respective Low
+      delay(500); // Adding a time delay
+      break; // Using break statement to get out off switch statement and also to not run the ahead code
+
+    case 3: // Case number 3 defined by the Count variable value
+      digitalWrite(LEDPin1,LOW); // Output for LED defined with respective Low
+      digitalWrite(LEDPin2,LOW); // Output for LED defined with respective Low
+      digitalWrite(LEDPin3,HIGH); // Output for LED defined with respective High
+      delay(500); // Adding a time delay
+      break; // Using break statement to get out off switch statement and also to not run the ahead code
+  }
+  
+  if (count == 3) { // Using an if statment to reset the Count value
+    count = 0; // Defining the count value again which will overwrite the previous value
+  }
+}

@@ -1,0 +1,20 @@
+#define LDRPin A0 // Definning a global variable for LDR pin
+
+int ldrValue; // Initializing a variable to store data
+int brightness; // Initializing a variable to store data
+
+void setup() {
+  Serial.begin(9600); // Calling serial monitor for data display
+}
+
+void loop() {
+  ldrValue = analogRead(LDRPin); // Reading data from LDR and storing in variable
+  brightness = map(ldrValue, 0, 1023, 0, 255); // Mapping analog data to digital data and storing in variable
+
+  Serial.print("Analog Value = "); // Printing data to serial monitor
+  Serial.print(ldrValue); // Printing value of ldrValue to serial monitor
+  Serial.print(", Digital Value = "); // Printing data to serial monitor
+  Serial.println(brightness); // Printing value of brightness to serial monitor
+
+  delay(500); // Adding a delay
+}
